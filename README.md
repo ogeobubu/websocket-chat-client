@@ -4,11 +4,9 @@ WebSocket Chat Client is a real-time chat application built with WebSocket techn
 
 ## Features
 
-- Join Chat Rooms: Users can select and join different chat rooms based on their interests or topics.
-- Real-Time Messaging: Chat messages are delivered instantly, creating a real-time conversation experience.
-- User Presence: Users can see who is currently online and actively participating in the chat.
-- Typing Indicator: Shows when other users are typing a message, providing an interactive and responsive feel.
-- Message History: Previous messages are displayed, allowing users to catch up on the conversation history.
+- Join Chat Rooms: Users can select and join different chat rooms based on attendees in a talk.
+- Real-Time Messaging: Chat messages are delivered instantly, creating a real-time conversation experience without any database.
+- Message History: Previous messages are displayed, allowing users to catch up on the conversation history only when the page is not refreahed.
 - User-friendly Interface: The client application has an intuitive and visually appealing interface for a smooth user experience.
 
 ## Getting Started
