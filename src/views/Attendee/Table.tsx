@@ -7,13 +7,12 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button,
 } from "@mui/material";
 
 interface IData {
   id: number;
   name: string;
-  description: string;
+  emailAddress: string; // Updated property name to match the interface
 }
 
 interface IProps {
@@ -21,7 +20,8 @@ interface IProps {
   onView: (id: number) => void;
 }
 
-const DataTable: React.FC<IProps> = ({ data, onView }) => {
+const DataTable: React.FC<IProps> = ({ data }) => {
+  // Removed unused prop 'onView'
   return (
     <TableContainer component={Paper}>
       <Table>

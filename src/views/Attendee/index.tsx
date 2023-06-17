@@ -1,16 +1,8 @@
 import React, { useState } from "react";
 import Table from "./Table";
-import { useQuery } from "react-query";
 import axios from "axios";
-import {
-  Box,
-  Modal,
-  TextField,
-  Alert,
-  Button,
-  FormHelperText,
-  Fab,
-} from "@mui/material";
+import { Box, Modal, TextField, Button, Fab } from "@mui/material";
+import { useQuery } from "react-query";
 
 type Props = {};
 
@@ -19,7 +11,7 @@ interface NewAttendee {
   name: string;
 }
 
-const Attendee = (props: Props) => {
+const Attendee: React.FC<Props> = () => {
   const { isLoading, error, data } = useQuery("talk", async () => {
     const response = await axios.get(
       "https://conference-api.onrender.com/attendee"
@@ -27,7 +19,6 @@ const Attendee = (props: Props) => {
     return response.data;
   });
 
-  // States
   const [newAttendee, setNewAttendee] = useState<NewAttendee>({
     email: "",
     name: "",
@@ -37,7 +28,6 @@ const Attendee = (props: Props) => {
 
   const handleSubmit = async () => {
     try {
-      // Perform form validation
       const validationErrors: { [key: string]: string } = {};
       if (!newAttendee.name) {
         validationErrors.name = "Name is required";
@@ -46,7 +36,6 @@ const Attendee = (props: Props) => {
         validationErrors.email = "Email is required";
       }
 
-      // Check if there are any validation errors
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
         return;
@@ -56,17 +45,16 @@ const Attendee = (props: Props) => {
         "https://conference-api.onrender.com/attendee",
         newAttendee
       );
-      // Perform create talk action with newAttendee data
-      // Add the new talk to the existing data
       localStorage.setItem("talksWeb", JSON.stringify(response.data));
       const updatedData = [...data, response.data];
       setNewAttendee(updatedData);
       console.log(response.data);
 
-      // Reset the newAttendee state and close the modal
       setNewAttendee({ email: "", name: "" });
       setOpenModal(false);
-    } catch (error) {}
+    } catch (error) {
+      // Handle error here
+    }
   };
 
   return (
@@ -97,8 +85,8 @@ const Attendee = (props: Props) => {
             }
             fullWidth
             margin="normal"
-            error={!!errors.name} // Check if there is a validation error for the name field
-            helperText={errors.name} // Display the validation error message for the name field
+            error={!!errors.name}
+            helperText={errors.name}
           />
 
           <TextField
@@ -110,8 +98,8 @@ const Attendee = (props: Props) => {
             }
             fullWidth
             margin="normal"
-            error={!!errors.email} // Check if there is a validation error for the email field
-            helperText={errors.email} // Display the validation error message for the email field
+            error={!!errors.email}
+            helperText={errors.email}
           />
 
           <Button variant="contained" color="primary" onClick={handleSubmit}>

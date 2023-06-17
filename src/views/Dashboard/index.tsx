@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -11,28 +11,18 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
-import Modal from "@mui/material/Modal";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import Fab from "@mui/material/Fab";
+import { Routes, Route } from "react-router-dom";
+import { Select, MenuItem, FormControl, FormHelperText } from "@mui/material";
 import { mainListItems, secondaryListItems } from "./listItems";
-import Copyright from "../../components/Copyright";
 import Talk from "../Talk";
 import Chat from "../Talk/Chat";
 import Attendee from "../Attendee";
+import { useQuery } from "react-query";
 import {
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  FormHelperText,
-} from "@mui/material";
-import { Routes, Route } from "react-router-dom";
+  Menu as MenuIcon,
+  Notifications as NotificationsIcon,
+  ChevronLeft as ChevronLeftIcon,
+} from "@mui/icons-material";
 
 const drawerWidth: number = 240;
 
@@ -84,11 +74,10 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Dashboard() {
-  const [open, setOpen] = useState(true);
+const Dashboard: React.FC = () => {
+  const [open, setOpen] = useState<boolean>(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -170,10 +159,11 @@ export default function Dashboard() {
               <Route path="/attendee" element={<Attendee />} />
               <Route path="/talk/:id" element={<Chat />} />
             </Routes>
-            <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>
     </ThemeProvider>
   );
-}
+};
+
+export default Dashboard;
